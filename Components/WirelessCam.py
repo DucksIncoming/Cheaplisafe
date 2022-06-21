@@ -1,0 +1,2 @@
+def WirelessCam():
+    pass
