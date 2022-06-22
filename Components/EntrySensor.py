@@ -1,38 +1,37 @@
 # Used to detect when a door is opened
 # https://simplisafe.com/build-my-system#:~:text=your%20Burglary%20Sensors-,Entry%20Sensor,-show%20more%20info
 
-from pyfirmata import Arduino
-import pyfirmata
+import serial
 import time
 
-# Arduino Pin Variables
+# Arduino Variables
 PORT = "COM9"
 
-# === Digital ===
-LED = 8
-ULTRASONIC_WRITE = 6
-TRANSMIT = 2
-# === Analog ===
-ULTRASONIC_READ = 2
+def parseInt(sin):
+  import re
+  m = re.search(r'^(\d+)[.,]?\d*?', str(sin))
+  return int(m.groups()[-1]) if m and not callable(sin) else None
 
 def EntrySensor():
-    global LED
-    global ULTRASONIC_WRITE
-    global TRANSMIT
-    global ULTRASONIC_READ
+    distance = 0
     
     try:
-        board = Arduino(PORT)
+        serialIn = serial.Serial(port=PORT, baudrate=9600, timeout=0.1)
     except:
         print("Arduino board not plugged in! (Or not accessible on specified port)")
         time.sleep(5)
         quit()
+        
 
-    iterator = pyfirmata.util.Iterator(board)
-    iterator.start()
-    print("EntrySensor: Ready")
-    board.get_pin('a:' + str(ULTRASONIC_READ) + ':i').enable_reporting()
+    print("Preparing...")
+    time.sleep(5)
+    print("Done!")
+
 
     while True:
-        board.pass_time(0.5)
-        print(board.analog[ULTRASONIC_READ].read())
+        if (serialIn.in_waiting):
+            serialRead = serialIn.readline()
+            serialRead = parseInt(serialRead.decode('utf'))
+            if (type(serialRead) == int):
+                distance = serialRead
+            print(distance)
