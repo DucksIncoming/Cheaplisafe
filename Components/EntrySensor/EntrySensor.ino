@@ -1,18 +1,19 @@
+#include <RadioHead.h>
 #include <RH_ASK.h>
 #include <SPI.h>
 
 const int trig = 6;
 const int echo = 4;
 const int LED = 8;
-char *msg = "0";
+const int transmit = 12;
+RH_ASK rf_driver;
 
 long duration;
 int distance;
-int incoming;
-
-RH_ASK rf_driver;
 
 void setup() {
+  rf_driver.init();
+  
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
   pinMode(LED, OUTPUT);
@@ -29,6 +30,7 @@ void loop() {
 
   duration = pulseIn(echo, HIGH);
   distance = duration*0.034 / 2;
+  char msg = "1";
 
   if (distance > 5) {
     digitalWrite(LED, HIGH);
@@ -38,11 +40,10 @@ void loop() {
     digitalWrite(LED, LOW);
     msg = "0";
   }
-
-  rf_driver.send((uint8_t *)msg, strlen(msg));
-  rf_driver.waitPacketSent();
-  delay(500);
-
   Serial.print(distance);
   Serial.println('\n');
+
+  const char *newMsg = msg;
+
+  rf_driver.send((uint8_t *)newMsg, strlen(newMsg));
 }

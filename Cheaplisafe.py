@@ -1,11 +1,10 @@
-import Components.Alarm as al
-import Components.CentralUnit as cu
-import Components.EntrySensor as es
-import Components.GlassBreak as gb
-import Components.Keypad as kp
-import Components.MotionSensor as ms
-import Components.PanicButton as pb
-import Components.WirelessCam as wc
+from Components.CentralUnit import *
+from Components.EntrySensor import *
+from Components.GlassBreak import *
+from Components.Keypad import *
+from Components.MotionSensor import *
+from Components.PanicButton import *
+from Components.WirelessCam import *
 
 # MODE: Sets which component's code to use
 # Options:
@@ -16,17 +15,33 @@ import Components.WirelessCam as wc
 #   4. GlassBreakSensor
 #   5. PanicButton
 #   6. Keypad
-#   7. Alarm
 
-MODE = 1
+MODE = 0
 
-ModeSwitch = {
-    0: cu.CentralUnit(),
-    1: es.EntrySensor(),
-    2: ms.MotionSensor(),
-    3: wc.WirelessCam(),
-    4: gb.GlassBreak(),
-    5: pb.PanicButton(),
-    6: kp.Keypad(),
-    7: al.Alarm(),
+NameSwitch = {
+    0: "Central Unit",
+    1: "Entry Sensor",
+    2: "Motion Sensor",
+    3: "Wireless Camera",
+    4: "Glass Break",
+    5: "Panic Button",
+    6: "Keypad"
 }
+
+print(" *=== Starting Cheaplisafe on mode: " + str(NameSwitch.get(MODE, "[N/A]")) + " ===* ")
+
+# I'll make this less disgusting later
+if (MODE == 0):
+    CentralUnit()
+elif (MODE == 1):
+    EntrySensor()
+elif (MODE == 2):
+    MotionSensor()
+elif (MODE == 3):
+    WirelessCam()
+elif (MODE == 4):
+    GlassBreak()
+elif (MODE == 5):
+    PanicButton()
+elif (MODE == 6):
+    Keypad()
