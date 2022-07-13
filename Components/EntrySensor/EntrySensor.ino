@@ -46,4 +46,5 @@ void loop() {
   const char *newMsg = msg;
 
   rf_driver.send((uint8_t *)newMsg, strlen(newMsg));
+  rf_driver.waitPacketSent();
 }
