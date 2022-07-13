@@ -15,8 +15,9 @@ RH_ASK driver;
 // RH_ASK driver(2000, 3, 4, 0); // ATTiny, RX on D3 (pin 2 on attiny85) TX on D4 (pin 3 on attiny85), 
 // RH_ASK driver(2000, PD14, PD13, 0); STM32F4 Discovery: see tx and rx on Orange and Red LEDS
 
-alarmPin = 9;
-alarmDuration = 5; // seconds
+const int alarmPin = 4
+;
+const int alarmDuration = 2; // seconds
 
 void setup()
 {
@@ -29,6 +30,21 @@ void setup()
 #else
   ;
 #endif
+
+pinMode(alarmPin, OUTPUT);
+
+digitalWrite(alarmPin, HIGH);
+delay(30);
+digitalWrite(alarmPin, LOW);
+delay(100);
+digitalWrite(alarmPin, HIGH);
+delay(30);
+digitalWrite(alarmPin, LOW);
+delay(100);
+digitalWrite(alarmPin, HIGH);
+delay(30);
+digitalWrite(alarmPin, LOW);
+delay(100);
 }
 
 void loop()
@@ -38,15 +54,19 @@ void loop()
 
     if (driver.recv(buf, &buflen)) // Non-blocking
     {
+
+      
   int i;
 
   // Message with a good checksum received, dump it.
   driver.printBuffer("Got:", buf, buflen);
   digitalWrite(alarmPin, HIGH);
+  Serial.println("TRYING");
   delay(alarmDuration * 1000);
+  digitalWrite(alarmPin, LOW);
     }
     else {
       Serial.println("No packet alert");
-      digitalWrite(alarmPin, LOW);
+      // digitalWrite(alarmPin, LOW);
     }
 }
