@@ -1,57 +1,77 @@
 #include <RH_ASK.h>
 #ifdef RH_HAVE_HARDWARE_SPI
-#include <SPI.h> // Not actually used but needed to compile
+#include <SPI.h>
 #endif
 
 RH_ASK driver;
-
-const int alarmPin = 4
-;
+const int alarmPin = 4;
 const int alarmDuration = 2; // seconds
+const String keypadCode = "1234A";
+const bool alarmStart = true;
 
-Serial.begin(9600);
-
-pinMode(alarmPin, OUTPUT);
-
-// Alarm beeps for initialization
-digitalWrite(alarmPin, HIGH);
-delay(30);
-digitalWrite(alarmPin, LOW);
-delay(100);
-digitalWrite(alarmPin, HIGH);
-delay(30);
-digitalWrite(alarmPin, LOW);
-delay(100);
-digitalWrite(alarmPin, HIGH);
-delay(30);
-digitalWrite(alarmPin, LOW);
-delay(100);
-
-void loop()
+void setup()
 {
-    uint8_t buf[RH_ASK_MAX_MESSAGE_LEN];
-    uint8_t buflen = sizeof(buf);
+  pinMode(alarmPin, OUTPUT);
+  
+  #ifdef RH_HAVE_SERIAL
+    Serial.begin(9600);
+  #endif
+    if (!driver.init())
+  #ifdef RH_HAVE_SERIAL
+    Serial.println("init failed");
+  #else
+    ;
+  #endif
 
-    if (driver.recv(buf, &buflen))
-    {
-  int i;
-
-  uint8_t alarmCode = 72;
-
-  if (buf == alarmCode){
-    Serial.println("Alarm");
+  for(int i = 0; i < 3; i++) {
+    digitalWrite(alarmPin, HIGH);
+    delay(30);
+    digitalWrite(alarmPin, LOW);
+    delay(100);
   }
-  
 
-  // Message with a good checksum received, dump it.
-  driver.printBuffer("Got:", buf, buflen);
-  digitalWrite(alarmPin, HIGH);
+  if (alarmStart) {
+    digitalWrite(alarmPin, HIGH);
+  }
+}
+
+void loop() {
+  uint8_t buf[RH_ASK_MAX_MESSAGE_LEN];
+  uint8_t buflen = sizeof(buf);
+
+  if (driver.recv(buf, &buflen)){
+    int i;
   
-  delay(alarmDuration * 1000);
-  digitalWrite(alarmPin, LOW);
+    //driver.printBuffer("Got:", buf, buflen);
+  
+    String data = ((String)(char*)buf);
+    data.trim();
+    data = data.substring(0, buflen);
+
+    Serial.println(data);
+    
+    if (data == "on_p"){
+      Serial.print("= ALARM ENABLED = ");
+      digitalWrite(alarmPin, HIGH);
     }
-    else {
-      Serial.println("No packet alert");
-      // digitalWrite(alarmPin, LOW);
+    else if (data == "on_t"){
+      Serial.print("= ALARM ENABLED = ");
+      
+      digitalWrite(alarmPin, HIGH);
+      delay(alarmDuration * 1000);
+      digitalWrite(alarmPin, LOW);
+
+      Serial.print("= ALARM DISABLED = ");
     }
+    else if (data == keypadCode){
+      Serial.print("= ALARM DISABLED = ");
+      
+      for(int i = 0; i < 3; i++) {
+        digitalWrite(alarmPin, HIGH);
+        delay(30);
+        digitalWrite(alarmPin, LOW);
+        delay(100);
+      }
+    }
+  }
 }
