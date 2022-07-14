@@ -51,23 +51,23 @@ void loop() {
     Serial.println(data);
     
     if (data == "on_p"){
-      Serial.print("= ALARM ENABLED = ");
+      Serial.println("= ALARM ENABLED = ");
       digitalWrite(alarmPin, HIGH);
     }
     else if (data == "on_t"){
-      Serial.print("= ALARM ENABLED = ");
+      Serial.println("= ALARM ENABLED = ");
       
       digitalWrite(alarmPin, HIGH);
       delay(alarmDuration * 1000);
       digitalWrite(alarmPin, LOW);
 
-      Serial.print("= ALARM DISABLED = ");
+      Serial.println("= ALARM DISABLED = ");
     }
     else if (data == keypadCode){
-      Serial.print("= ALARM DISABLED = ");
+      Serial.println("= ALARM DISABLED = ");
       
       for(int i = 0; i < 3; i++) {
-        digitalWrite(alarmPin, HIGH);
+        digitalWrite(alarmPin, HIGH);;
         delay(30);
         digitalWrite(alarmPin, LOW);
         delay(100);
