@@ -43,16 +43,15 @@ void loop() {
   Serial.println(dB);
 
   if (dB >= 90){
-    char msg = "";
+    String msg = "on_t";
     
     if (mode == "P"){
       msg = "on_p";
     }
-    else {
-      msg = "on_t";
-    }
 
-    const char *sendMsg = msg;
+    const char *sendMsg = msg.c_str();
+    Serial.print("MSG: ");
+    Serial.println(msg);
 
     driver.send((uint8_t *)sendMsg, strlen(sendMsg));
     driver.waitPacketSent();
