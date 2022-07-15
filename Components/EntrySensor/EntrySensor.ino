@@ -34,12 +34,9 @@ void loop() {
 
   if (distance > 5) {
     digitalWrite(LED, HIGH);
-    msg = "1";
+    msg = "on_t";
   }
-  else {
-    digitalWrite(LED, LOW);
-    msg = "0";
-  }
+
   Serial.print(distance);
   Serial.println('\n');
 

@@ -12,7 +12,7 @@ void setup() {
 }
 
 void loop() {
-  const char *msg = "y";
+  const char *msg = "open_t";
   int buttonState = digitalRead(button);
   // Serial.println(buttonState);
 

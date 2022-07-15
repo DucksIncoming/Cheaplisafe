@@ -67,7 +67,7 @@ void loop() {
       Serial.println("= ALARM DISABLED = ");
       
       for(int i = 0; i < 3; i++) {
-        digitalWrite(alarmPin, HIGH);;
+        digitalWrite(alarmPin, HIGH);;+
         delay(30);
         digitalWrite(alarmPin, LOW);
         delay(100);
