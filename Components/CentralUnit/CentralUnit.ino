@@ -7,7 +7,7 @@ RH_ASK driver;
 const int alarmPin = 4;
 const int alarmDuration = 2; // seconds
 const String keypadCode = "1234A";
-const bool alarmStart = true;
+const bool alarmStart = false;
 
 void setup()
 {
@@ -67,7 +67,7 @@ void loop() {
       Serial.println("= ALARM DISABLED = ");
       
       for(int i = 0; i < 3; i++) {
-        digitalWrite(alarmPin, HIGH);;+
+        digitalWrite(alarmPin, HIGH);
         delay(30);
         digitalWrite(alarmPin, LOW);
         delay(100);
