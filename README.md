@@ -14,14 +14,14 @@ Product Lineup:
   - Simplisafe: $29.99
   - CheapliSafe: $12.00
   - Savings: $17.99
-- Wireless Cam (To-Do)
-  - Simplisafe: $169.99
-  - CheapliSafe: $24.26
-  - Savings: $145.73
-- Glass Break Sensor (To-Do)
+- Smart Lock (To-Do)
+  - Simplisafe: $99.00
+  - Cheaplisafe: $12.00
+  - Savings: $87.00
+- Loud Noise/Glassbreak Sensor (To-Do)
   - Simplisafe: $34.99
-  - CheapliSafe: $13.20
-  - Savings: $21.79
+  - Cheaplisafe: $12.00
+  - Savings: $22.99
 - Panic Button (Finished)
   - Simplisafe: $19.99
   - CheapliSafe: $10.15
@@ -39,11 +39,11 @@ Product Lineup:
   - CheapliSafe: $0.80
   - Savings: $59.19
 
-Total Savings: $428.80 
-
+Total Savings: $381.87
 
 Project Status: Unfinished
 
 Started: 06/20/22
+Finished: TBD
 
 Video: TBD
