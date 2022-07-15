@@ -18,7 +18,7 @@ Product Lineup:
   - Simplisafe: $99.00
   - Cheaplisafe: $12.00
   - Savings: $87.00
-- Loud Noise/Glassbreak Sensor (To-Do)
+- Loud Noise/Glassbreak Sensor (Finished)
   - Simplisafe: $34.99
   - Cheaplisafe: $12.00
   - Savings: $22.99
