@@ -3,7 +3,8 @@
 #include <RH_ASK.h>
 #include <SPI.h>
 
-const int servoPin = 9;
+const int servoPin = 8;
+const int LEDpin = 9;
 ServoTimer2 serv;
 //int pos = 0;
 bool state = false;
@@ -12,15 +13,18 @@ RH_ASK driver;
 void setup() {
   serv.attach(servoPin);
   Serial.begin(9600);
+  
   driver.init();
 }
 
 void loop() {
   if (state) {
-    serv.write(0);
+    digitalWrite(LEDpin, HIGH);
+    serv.write(90);
   }
   else {
-    serv.write(90);
+    digitalWrite(LEDpin, LOW);
+    serv.write(0);
   }
 
   uint8_t buf[RH_ASK_MAX_MESSAGE_LEN];
@@ -32,6 +36,8 @@ void loop() {
     String data = ((String)(char*)buf);
     data.trim();
     data = data.substring(0, buflen);
+
+    Serial.println(data);
 
     if (data == "lock"){
       state = true;
