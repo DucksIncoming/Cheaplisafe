@@ -6,8 +6,14 @@
 RH_ASK driver;
 const int alarmPin = 4;
 const int alarmDuration = 2; // seconds
-const String keypadCode = "1234A";
 const bool alarmStart = false;
+
+const int buttonPin = 2;
+const String buttonFunction = "toggle"; // What command the button will send, currently only used for the SmartLock ("toggle" || "lock" || "unlock")
+const int buttonOnState = 0; // Some buttons are normally closed, some normally open. Set to yours.
+
+const String keypadCode = "1234A";
+
 
 void setup()
 {
@@ -49,7 +55,8 @@ void loop() {
     data = data.substring(0, buflen);
 
     Serial.println(data);
-    
+
+    // Alarm handling
     if (data == "on_p"){
       Serial.println("= ALARM ENABLED = ");
       digitalWrite(alarmPin, HIGH);
@@ -73,5 +80,17 @@ void loop() {
         delay(100);
       }
     }
+  }
+  // Multifunction button
+  int buttonState = digitalRead(buttonPin);
+  Serial.print("Button State: ");
+  Serial.println(buttonState);
+
+  if (buttonState == buttonOnState){
+    const char *msg = buttonFunction.c_str();
+    driver.send((uint8_t *)msg, strlen(msg));
+    driver.waitPacketSent();
+    Serial.println("Button command triggered");
+    delay(50);
   }
 }

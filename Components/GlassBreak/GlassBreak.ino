@@ -2,7 +2,6 @@
 #include <RH_ASK.h>
 #include <SPI.h>
 
-
 const int soundPin = A4; //Analog
 const int sampleDuration = 50; //milliseconds
 const int threshold = 90; // in dB, arbitrary
