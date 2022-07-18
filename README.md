@@ -10,7 +10,7 @@ Product Lineup:
   - Simplisafe: $14.99
   - CheapliSafe: $11.30
   - Savings: $3.69
-- Motion Sensor (To-Do)
+- Motion Sensor (Finished)
   - Simplisafe: $29.99
   - CheapliSafe: $12.00
   - Savings: $17.99
