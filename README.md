@@ -14,10 +14,6 @@ Product Lineup:
   - Simplisafe: $29.99
   - CheapliSafe: $12.00
   - Savings: $17.99
-- Smart Lock (To-Do)
-  - Simplisafe: $99.00
-  - Cheaplisafe: $12.00
-  - Savings: $87.00
 - Loud Noise/Glassbreak Sensor (Finished)
   - Simplisafe: $34.99
   - Cheaplisafe: $12.00
@@ -39,7 +35,7 @@ Product Lineup:
   - CheapliSafe: $0.80
   - Savings: $59.19
 
-Total Savings: $381.87
+Total Savings: $294.87
 
 Project Status: Unfinished
 
