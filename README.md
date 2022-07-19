@@ -40,6 +40,6 @@ Total Savings: $294.87
 Project Status: Unfinished
 
 Started: 06/20/22
-Finished: TBD
+Finished: 7/19/22
 
 Video: TBD
