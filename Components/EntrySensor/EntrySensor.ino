@@ -34,14 +34,12 @@ void loop() {
 
   if (distance > 5) {
     digitalWrite(LED, HIGH);
-    msg = "on_t";
+    const char *msg = "on_t";
+
+    rf_driver.send((uint8_t *)msg, strlen(msg));
+    rf_driver.waitPacketSent();
   }
 
   Serial.print(distance);
   Serial.println('\n');
-
-  const char *newMsg = msg;
-
-  rf_driver.send((uint8_t *)newMsg, strlen(newMsg));
-  rf_driver.waitPacketSent();
 }
