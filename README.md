@@ -37,7 +37,7 @@ Product Lineup:
 
 Total Savings: $294.87
 
-Project Status: Unfinished
+Project Status: Finished
 
 Started: 06/20/22
 Finished: 7/19/22
